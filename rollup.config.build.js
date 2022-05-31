@@ -6,21 +6,29 @@ import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
 import vue from 'rollup-plugin-vue'
 import { terser } from 'rollup-plugin-terser'
+import alias from '@rollup/plugin-alias'
+import replace from 'rollup-plugin-replace'
+const env = process.env.NODE_ENV
+const path = require('path')
+const resolveDir = dir => path.join(__dirname, dir)
 export default {
   input: './src/index.js',
   output: [
     {
       file: './dist/lib-umd.js',
       format: 'umd',
-      name: 'lib'
+      name: 'lib',
+      sourcemap: true
     },
     {
       file: './dist/lib-es.js',
-      format: 'es'
+      format: 'es',
+      sourcemap: true
     },
     {
       file: './dist/lib-cjs.js',
-      format: 'cjs'
+      format: 'cjs',
+      sourcemap: true
     }
   ],
   plugins: [
@@ -34,6 +42,14 @@ export default {
         autoprefixer(),
         cssnano()
       ]
+    }),
+    alias({
+      entries: [
+        {find: '@', replacement: resolveDir('src')}
+      ]
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(env)
     }),
     vue({
       style: {
