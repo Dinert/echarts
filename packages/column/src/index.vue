@@ -1,10 +1,11 @@
 <template>
   <div class="e_chart">
-    <slot>{{msg}}</slot>
+    {{msg}}
   </div>
 </template>
 
 <script>
+import '../../../src/scss/index.scss';
 export default {
   name: "column",
   props: {
@@ -17,5 +18,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('../../../src/scss/index.scss');
 </style>

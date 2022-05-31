@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echarts图表</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #app {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <d-column msg="fdsfas"></d-column>
+    </div>
+  </div>
+</body>
+<script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="./dist/lib-umd.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+
+    },
+    components: {
+      DColumn: lib.DColumn
+    }
+  })
+</script>
+
+</html>
