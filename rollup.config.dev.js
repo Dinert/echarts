@@ -19,7 +19,11 @@ export default {
       file: './dist/lib-umd.js',
       format: 'umd',
       name: 'lib',
-      sourcemap: true
+      sourcemap: true,
+      globals: {
+        echarts: 'echarts',
+        lodash: '_'
+      }
     },
     {
       file: './dist/lib-es.js',
@@ -67,9 +71,10 @@ export default {
   ],
   external: [  //外部库， 使用'umd'文件时需要先引入这个外部库
     'vue',
-    'echarts'
+    'echarts',
+    'lodash'
   ],
   watch: {  // 配置监听处理
     exclude: 'node_modules/**'
-  },
+  }
 }

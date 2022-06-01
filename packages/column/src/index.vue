@@ -11,7 +11,7 @@ export default {
   name: "Column",
   mixins: [myMixins],
   props: {
-    chartData: {
+    chartdata: {
       type: Object,
       default: () => {}
     },
@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss" >
 // .e_chart{
 //   width: 400px;
 // }
