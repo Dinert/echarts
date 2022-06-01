@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 /**
  * 获取唯一ID
  * @returns String
@@ -13,4 +15,17 @@
   s[8] = s[13] = s[18] = s[23] = '-'
   let uuid = s.join('')
   return uuid
+}
+
+/**
+ * 
+ * @param {Function} resize 
+ * @param {Number} delay 
+ * @param {Boolean} immediate 
+ */
+export const resize = (resize, delay = 0, immediate = false) => {
+  if (typeof resize === 'function') {
+    window.addEventListener('resize', _.debounce(resize, delay), immediate)
+    resize()
+  }
 }

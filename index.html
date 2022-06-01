@@ -23,7 +23,7 @@
 
 <body>
   <div id="app">
-    <d-column msg="fdsfas"></d-column>
+    <d-column @callback="callback" @config-callback="configCallback"></d-column>
   </div>
 </body>
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -32,7 +32,13 @@
   new Vue({
     el: '#app',
     data: {
-
+    },
+    methods: {
+      configCallback(chart, options, callback) {
+      },
+      callback(chart) {
+        console.log(chart, 'aaaaaaaaaaaa')
+      }
     },
     components: {
       DColumn: lib.DColumn
