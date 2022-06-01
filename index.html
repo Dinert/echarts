@@ -23,7 +23,7 @@
 
 <body>
   <div id="app">
-    <d-column @callback="callback" @config-callback="configCallback"></d-column>
+    <d-column @callback="callback" @config-callback="configCallback" :chartData="chartData"></d-column>
   </div>
 </body>
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -32,6 +32,25 @@
   new Vue({
     el: '#app',
     data: {
+      chartData: {
+        xAxis: [
+          {
+            type: "category",
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+          },
+        ],
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: "line",
+          },
+        ],
+      }
     },
     methods: {
       configCallback(chart, options, callback) {

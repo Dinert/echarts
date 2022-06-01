@@ -18,31 +18,12 @@ export default {
     // 初始化图表
     this.chartDom = document.getElementById(this.id);
     this.chart = echarts.init(this.chartDom);
-    let options = {
-      xAxis: [
-        {
-          type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        },
-      ],
-      yAxis: [
-        {
-          type: "value",
-        },
-      ],
-      series: [
-        {
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: "line",
-        },
-      ],
-    };
 
     // 默认配置
-    this.defaultOptions = _.defaultsDeep(defaultOptions, this.defaultOptions)
+    let propDfaultOptions = _.defaultsDeep(this.defaultOptions, defaultOptions)
 
     // 数据组装完成
-    options = _.defaultsDeep(options, this.defaultOptions)
+    let options = _.defaultsDeep(this.chartdata, propDfaultOptions)
     if(typeof options.configCallback === 'function') {
         options = options.configCallback(options, this.chart)
     }else {
@@ -51,6 +32,7 @@ export default {
       })
     }
 
+    // 渲染图表
     this.chart.setOption(options, true);
 
     // 图表渲染完成
