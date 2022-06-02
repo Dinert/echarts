@@ -5,3 +5,14 @@
 <a href="https://www.lodashjs.com/">
     <img src="https://img.shields.io/badge/lodash-4.17.21-brightgreen" alt="element-plus">
 </a>
+
+## Installation
+In a browser：
+```html
+<script src="lib-umd.js"></script>
+```
+Using npm:
+```shell
+$ npm i '@dinert/echarts'
+$ yarn add '@dinert/echarts'
+```
