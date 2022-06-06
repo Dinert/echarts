@@ -15,16 +15,17 @@ export default {
     this.id = "e_chart_" + getUuid();
   },
   mounted() {
-    
+
     // 初始化图表
     this.chartDom = document.getElementById(this.id);
     this.chart = echarts.init(this.chartDom);
 
     // 默认配置
-    let propDfaultOptions = _.defaultsDeep(this.defaultOptions, defaultOptions)
+    let propDfaultOptions = _.defaultsDeep(this.options, defaultOptions)
+    console.log('aaaaaaaaaa')
 
     // 数据组装完成
-    let options = _.defaultsDeep(this.chartdata, propDfaultOptions)
+    let options = _.defaultsDeep(this.chartData, propDfaultOptions)
     if(typeof options.configCallback === 'function') {
         options = options.configCallback(options, this.chart)
     }else {

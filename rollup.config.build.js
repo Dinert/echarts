@@ -45,7 +45,8 @@ export default {
     }),
     alias({
       entries: [
-        {find: '@', replacement: resolveDir('src')}
+        {find: '@', replacement: resolveDir('src')},
+        {find: '#', replacement: resolveDir('packages')}
       ]
     }),
     replace({

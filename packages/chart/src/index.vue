@@ -8,14 +8,14 @@
 import myMixins from '#/mixins/index'
 import "@/scss/index.scss";
 export default {
-  name: "Column",
+  name: "DChart",
   mixins: [myMixins],
   props: {
-    chartdata: {
+    chartData: {
       type: Object,
       default: () => {}
     },
-    defaultOptions: {
+    options: {
       type: Object,
       default: () => {}
     }

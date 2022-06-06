@@ -1,12 +1,12 @@
 
-import DColumn from '../packages/column/index.js'
+import DChart from '../packages/chart/index.js'
 
 function install(Vue) {
-  Vue.component(DColumn.name, DColumn)
+  Vue.component(DChart.name, DChart)
 }
 
 export {
-  DColumn
+  DChart
 }
 
 
