@@ -23,8 +23,5 @@ export default {
 };
 </script>
 
-<style scoped lang="scss" >
-// .e_chart{
-//   width: 400px;
-// }
+<style lang="scss" scoped>
 </style>

@@ -15,6 +15,7 @@ export default {
     this.id = "e_chart_" + getUuid();
   },
   mounted() {
+    
     // 初始化图表
     this.chartDom = document.getElementById(this.id);
     this.chart = echarts.init(this.chartDom);

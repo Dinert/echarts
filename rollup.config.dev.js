@@ -64,7 +64,7 @@ export default {
     vue({
       style: {
         postcssPlugins: [
-          autoprefixer()
+          autoprefixer(),
         ]
       }
     }),
