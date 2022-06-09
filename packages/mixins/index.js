@@ -22,12 +22,13 @@ export default {
 
     // 默认配置
     let propDfaultOptions = _.defaultsDeep(this.options, defaultOptions)
-    console.log('aaaaaaaaaa')
 
     // 数据组装完成
     let options = _.defaultsDeep(this.chartData, propDfaultOptions)
+
+    // 数据组装完成的回调
     if(typeof options.configCallback === 'function') {
-        options = options.configCallback(options, this.chart)
+      options = options.configCallback(options, this.chart)
     }else {
       this.$emit('config-callback', options, this.chart, value => {
         options = value
