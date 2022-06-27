@@ -23,35 +23,97 @@
 
 <body>
   <div id="app">
-    <d-chart @callback="callback" @config-callback="configCallback" :chartData="chartData"></d-chart>
+    <d-chart @callback="callback" @config-callback="configCallback" :chart-data="chartData"></d-chart>
   </div>
 </body>
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-<script src="./dist/lib-umd.js"></script>
+<script src="./dist/bundle.umd.js"></script>
 <script>
+  var data = [{
+    value: 3661,
+    name: '<10w'
+  }, {
+    value: 5713,
+    name: '10w-50w'
+  }, {
+    value: 9938,
+    name: '50w-100w'
+  }, {
+    value: 17623,
+    name: '100w-500w'
+  }, {
+    value: 3299,
+    name: '>500w'
+  }];
+  option = {
+    backgroundColor: '#fff',
+    title: {
+      text: '注册资金',
+      subtext: '2016年',
+      x: 'center',
+      y: 'center',
+      textStyle: {
+        fontWeight: 'normal',
+        fontSize: 16
+      }
+    },
+    tooltip: {
+      show: true,
+      trigger: 'item',
+      formatter: "{b}: {c} ({d}%)"
+    },
+    legend: {
+      orient: 'vertical',
+      icon: 'circle',
+      right: '2%',
+      top: '30%',
+      data: ['<10w', '10w-50w', '50w-100w', '100w-500w', '>500w']
+    },
+    series: [{
+      type: 'pie',
+      selectedMode: 'single',
+      radius: ['25%', '58%'],
+      color: ['#86D560', '#AF89D6', '#59ADF3', '#FF999A', '#FFCC67'],
+
+      label: {
+        normal: {
+          position: 'inner',
+          formatter: '{d}%',
+
+          textStyle: {
+            color: '#fff',
+            fontWeight: 'bold',
+            fontSize: 14
+          }
+        }
+      },
+      labelLine: {
+        normal: {
+          show: false
+        }
+      },
+      itemStyle: {
+        borderColor: '#fff',
+        borderWidth: 20
+      },
+      data: data
+    }, {
+      type: 'pie',
+      radius: ['58%', '60%'],
+      itemStyle: {
+        normal: {
+          color: '#0E3871'
+        },
+      },
+      label: {},
+      data: data
+    }]
+  }
   new Vue({
     el: '#app',
     data: {
-      chartData: {
-        xAxis: [
-          {
-            type: "category",
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          },
-        ],
-        yAxis: [
-          {
-            type: "value",
-          },
-        ],
-        series: [
-          {
-            data: [150, 230, 224, 218, 135, 147, 260],
-            type: "line",
-          },
-        ],
-      }
+      chartData: { ...option }
     },
     methods: {
       configCallback(chart, options, callback) {
@@ -62,7 +124,7 @@
       }
     },
     components: {
-      DChart: lib.DChart
+      DChart: window['dinert-echarts'].DChart
     }
   })
 </script>

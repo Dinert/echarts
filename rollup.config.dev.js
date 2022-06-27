@@ -7,18 +7,20 @@ import livereload from 'rollup-plugin-livereload'
 import autoprefixer from 'autoprefixer'
 import vue from 'rollup-plugin-vue'
 import alias from '@rollup/plugin-alias'
+import pkg from './package.json'
 import replace from 'rollup-plugin-replace'
 
 const env = process.env.NODE_ENV
 const path = require('path')
 const resolveDir = dir => path.join(__dirname, dir)
+
 export default {
   input: './src/index.js',
   output: [
     {
-      file: './dist/lib-umd.js',
+      file: pkg.browser,
       format: 'umd',
-      name: 'lib',
+      name: 'dinert-echarts',
       sourcemap: true,
       globals: {
         echarts: 'echarts',
@@ -26,12 +28,12 @@ export default {
       }
     },
     {
-      file: './dist/lib-es.js',
-      format: 'es',
+      file: pkg.module,
+      format: 'esm',
       sourcemap: true
     },
     {
-      file: './dist/lib-cjs.js',
+      file: pkg.main,
       format: 'cjs',
       sourcemap: true
     }

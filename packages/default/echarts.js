@@ -1,7 +1,7 @@
 import * as echarts from 'echarts/core'
 
 // 引入柱状图
-import { BarChart, LineChart, ScatterChart  } from 'echarts/charts'
+import { BarChart, LineChart, ScatterChart, PictorialBarChart,PieChart   } from 'echarts/charts'
 
 // 引入提示框，标题，直角坐标系，数据集，内置数据转换器组件，组件后缀都为 Component
 import {
@@ -28,12 +28,15 @@ echarts.use([
   DatasetComponent,
   TransformComponent,
   LegendComponent,
+  LabelLayout,
+  UniversalTransition,
+  CanvasRenderer,
+
+  PieChart,
   BarChart,
   LineChart,
   ScatterChart,
-  LabelLayout,
-  UniversalTransition,
-  CanvasRenderer
+  PictorialBarChart
 ]);
 
 export default echarts

@@ -2,8 +2,9 @@
   "name": "@dinert/echarts",
   "version": "0.0.5",
   "description": "基于echarts二次封装的vue组件",
-  "main": "dist/lib-umd.js",
-  "module": "dist/lib-es.js",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "browser": "dist/bundle.umd.js",
   "scripts": {
     "build": "rollup --config rollup.config.build.js",
     "dev": "rollup --config rollup.config.dev.js -w"

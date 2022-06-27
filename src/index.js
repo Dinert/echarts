@@ -1,13 +1,10 @@
 
 import DChart from '../packages/chart/index.js'
-
-function install(Vue) {
-  Vue.component(DChart.name, DChart)
-}
-
+import eCharts from '../packages/default/echarts'
+import ShineBar from '../packages/config/shine-bar'
 export {
-  DChart
+  DChart,
+  eCharts,
+  ShineBar
 }
 
-
-export default install  //umd

@@ -8,25 +8,32 @@ import vue from 'rollup-plugin-vue'
 import { terser } from 'rollup-plugin-terser'
 import alias from '@rollup/plugin-alias'
 import replace from 'rollup-plugin-replace'
+import pkg from './package.json'
+
 const env = process.env.NODE_ENV
 const path = require('path')
 const resolveDir = dir => path.join(__dirname, dir)
+
 export default {
   input: './src/index.js',
   output: [
     {
-      file: './dist/lib-umd.js',
+      file: pkg.browser,
       format: 'umd',
-      name: 'lib',
+      name: 'dinert-echarts',
+      sourcemap: true,
+      globals: {
+        echarts: 'echarts',
+        lodash: '_'
+      }
+    },
+    {
+      file: pkg.module,
+      format: 'esm',
       sourcemap: true
     },
     {
-      file: './dist/lib-es.js',
-      format: 'es',
-      sourcemap: true
-    },
-    {
-      file: './dist/lib-cjs.js',
+      file: pkg.main,
       format: 'cjs',
       sourcemap: true
     }
