@@ -42,10 +42,10 @@ export default {
       })
     }
 
-
     // 渲染图表
     this.chart.setOption(options, true);
 
+    // 是否自动播放tooltip
     if(options._autoTooltip && options.series && options.series.length) {
       this.autoTooltipPlay(this.chart, this.dataIndex, options)
       this.chart.on('mouseover', event => {
