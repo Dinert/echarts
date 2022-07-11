@@ -15,7 +15,7 @@ export default {
     triggerEvent: true,
     show: true,
     inverse: true,
-    data: ['user3', 'user4', 'user4', 'user3', 'user2', 'user2', 'user2', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'user1', 'user1'],
+    data: ['user3', 'user4', 'user4', 'user3', 'user2', 'user2', 'user2', 'a', 'user1', 'user1'],
     axisLine: {
       show: false
     },

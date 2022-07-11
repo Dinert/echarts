@@ -9,6 +9,8 @@ export default {
       id: "",
       chartDom: "",
       chart: null,
+      timer: null,
+      dataIndex: 0
     };
   },
   created() {
@@ -26,6 +28,11 @@ export default {
     // 数据组装完成
     let options = _.defaultsDeep(this.chartData, propDfaultOptions)
 
+    // 是否显示暂无数据
+    if(options.series && options.series.length && options.series[0].data && options.series[0].data.length) {
+      options.graphic.invisible = true
+    }
+
     // 数据组装完成的回调
     if(typeof options.configCallback === 'function') {
       options = options.configCallback(options, this.chart)
@@ -35,8 +42,19 @@ export default {
       })
     }
 
+
     // 渲染图表
     this.chart.setOption(options, true);
+
+    if(options._autoTooltip && options.series && options.series.length) {
+      this.autoTooltipPlay(this.chart, this.dataIndex, options)
+      this.chart.on('mouseover', event => {
+        this.timer && clearTimeout(this.timer)
+      })
+      this.chart.on('mouseout', event => {
+        this.autoTooltipPlay(this.chart, this.dataIndex, options)
+      })
+    }
 
     // 图表渲染完成
     typeof options.callback === 'function' && options.callback(this.chart, options)
@@ -45,4 +63,19 @@ export default {
       this.chart.resize()
     }, 10)
   },
+  methods: {
+    autoTooltipPlay(chart, index, options) {
+      this.timer = setTimeout(() => {
+        chart.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        this.timer && clearTimeout(this.timer)
+        console.log(this.dataIndex, 'aaaaaaaaaaaaaa')
+        options.series[0].data.length === this.dataIndex + 1 ? (this.dataIndex = 0) : this.dataIndex ++
+        this.autoTooltipPlay(chart, this.dataIndex, options)
+      }, 3000)
+    }
+  }
 }
