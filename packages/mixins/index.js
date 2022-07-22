@@ -37,8 +37,9 @@ export default {
       options = options.configCallback(options, this.chart)
     }else {
       this.$emit('config-callback', options, this.chart, value => {
-        console.log(value, 'valueeeeeeeeeeeeeeeeee')
-        options = value
+        if(Object.prototype.toString.call(value) === '[object Object]' && JSON.stringify(value) !== '{}') {
+          options = value
+        }
       })
     }
 
