@@ -1,10 +1,8 @@
 
-import DChart from '../packages/chart/index.js'
+import DEchart from '../packages/chart/index.js'
 import eCharts from '../packages/default/echarts'
-import ShineBar from '../packages/config/shine-bar'
 export {
-  DChart,
+  DEchart,
   eCharts,
-  ShineBar
 }
 

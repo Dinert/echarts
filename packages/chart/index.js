@@ -1,2 +1,2 @@
-import DChart from './src/index.vue'
-export default DChart
+import DEchart from './src/index.vue'
+export default DEchart

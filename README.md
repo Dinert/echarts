@@ -16,6 +16,7 @@ In a browser：
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 <script src="lib-umd.js"></script>
 ```
+
 Using npm:
 ```shell
 $ npm i '@dinert/echarts'
