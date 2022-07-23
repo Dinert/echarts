@@ -18,6 +18,10 @@ export default {
     options: {
       type: Object,
       default: () => {}
+    },
+    type: {
+      type: String,
+      default: 'line'
     }
   }
 };

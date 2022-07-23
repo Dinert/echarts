@@ -43,19 +43,25 @@ $ yarn add '@dinert/echarts'
 ```
 
 ### DEchart Attributes
-|    参数    |       说明       |  类型  | 可选值 | 默认值 |
-| :--------: | :--------------: | :----: | :----: | :----: |
-| chart-data | echarts的options | Object |   一   |   {}   |
+|    参数    |       说明        |  类型  |      可选值       | 默认值 |
+| :--------: | :---------------: | :----: | :---------------: | :----: |
+| chart-data | echarts的options  | Object |        一         |   {}   |
+|    type    | echarts的图表类型 | Object | echarts的图表类型 |  line  |
+
+### chart-data下的echarts额外属性
+| 参数  | 说明  | 类型  | 可选值 | 默认值 |
+| :---: | :---: | :---: | :----: | :----: |
+
 
 ### DEchart Events
 #### 注意事项
 1、当chart-data中有configCallback和callback的函数时，执行的是chart-data对象中的configCallback和callback
 2、如果要执行下面的函数请删除chart-data属性中的configCallback和callback
 3、cb是一个函数回调的是echarts的配置项，图表渲染时会使用这个配置项，所以请这样使用cb({})，对象为空时不会使用。
-|    事件名称    |       说明       |       回调参数       |
-| :------------: | :--------------: | :------------------: |
+|    事件名称    |        说明        |       回调参数       |
+| :------------: | :----------------: | :------------------: |
 | configCallback | 图表渲染之前的回调 | (options, chart, cb) |
-| callback | 图表渲染完成的回调 | (chart, options) |
+|    callback    | 图表渲染完成的回调 |   (chart, options)   |
 
 
 

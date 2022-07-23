@@ -17,6 +17,8 @@ export default {
   },
   mounted() {
 
+    const otherParams = ['callback', 'config-callback', '_autoTooltip']
+
     // 初始化图表
     this.chartDom = document.getElementById(this.id);
     this.chart = echarts.init(this.chartDom);
@@ -26,6 +28,9 @@ export default {
 
     // 数据组装完成
     let options = _.defaultsDeep(this.chartData, propDfaultOptions)
+
+    // 设置默认颜色
+    this.setGradualColors(options)
 
     // 是否显示暂无数据
     if(options.series && options.series.length && options.series[0].data && options.series[0].data.length) {
@@ -43,8 +48,19 @@ export default {
       })
     }
 
+    // 获取需要的echarts的options
+    const echartOptions = {}
+    for(const prop in options) {
+      if(!otherParams.includes(prop)) {
+        echartOptions[prop] = options[prop]
+      }
+    }
+    
+    // 根据不同的type生成不同的默认配置项
+      this.setOptions(echartOptions, this.type)
+
     // 渲染图表
-    this.chart.setOption(options, true);
+    this.chart.setOption(echartOptions, true);
 
     // 是否自动播放tooltip
     if(options._autoTooltip && options.series && options.series.length) {
@@ -80,6 +96,42 @@ export default {
         options.series[0].data.length === this.dataIndex + 1 ? (this.dataIndex = 0) : this.dataIndex ++
         this.autoTooltipPlay(chart, this.dataIndex, options)
       }, 3000)
+    },
+
+    // 根据不同type设置不同默认配置项
+    setOptions(echartOptions, type) {
+      if(type === 'line') {
+        echartOptions.xAxis =  echartOptions.xAxis || [{}]
+        echartOptions.yAxis =  echartOptions.yAxis || [{}]
+      }
+    },
+
+    setGradualColors(options) {
+      const color = []
+        if(options._isGradualColors) {
+          options.color.forEach(item => {
+            let endColor = item.replace('#', '')
+            let endColorList = [
+              parseInt(endColor.substring(0, 2), 16),
+              parseInt(endColor.substring(2, 4), 16),
+              parseInt(endColor.substring(4, 6), 16)
+            ]
+            let scale = 0.7
+            color.push(
+              new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: item },
+                {
+                  offset: 1,
+                  color: `rgb(${endColorList[0] +
+                    endColorList[1] * scale},${endColorList[1] +
+                    endColorList[2] * scale},${endColorList[2] +
+                    endColorList[0] * scale})`
+                }
+              ])
+            )
+          })
+        }
+        options.color = color;
     }
   }
 }

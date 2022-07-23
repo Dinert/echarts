@@ -15,8 +15,8 @@ const colorList = [
   '#96BFFF'
 ]
 const color = []
- colorList.forEach((v, i) => {
-  let endColor = v.replace('#', '')
+ colorList.forEach(item => {
+  let endColor = item.replace('#', '')
   let endColorList = [
     parseInt(endColor.substring(0, 2), 16),
     parseInt(endColor.substring(2, 4), 16),
@@ -24,8 +24,8 @@ const color = []
   ]
   let scale = 0.7
   color.push(
-    new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      { offset: 0, color: v },
+    new echarts.graphic.LinearGradient(1, 0, 0, 1, [
+      { offset: 0, color: item },
       {
         offset: 1,
         color: `rgb(${endColorList[0] +
@@ -36,4 +36,5 @@ const color = []
     ])
   )
 })
+
 export default color
