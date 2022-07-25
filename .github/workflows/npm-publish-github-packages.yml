@@ -4,8 +4,11 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+      - "releases/**"
+      - dev
 
 jobs:
   build:
@@ -29,8 +32,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://registry.npmjs.org
       - run: npm ci
+      - name: 打包
+      - run: npm run build
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with: 
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: main
+          FOLDER: "/*"
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
