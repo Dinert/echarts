@@ -41,7 +41,7 @@ jobs:
         with: 
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: main
-          FOLDER: "/*"
+          FOLDER: dist
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
