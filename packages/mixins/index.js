@@ -181,8 +181,8 @@ export default {
             ])
           )
         })
+        options.color = color;
       }
-      options.color = color;
     }
   },
   watch: {
