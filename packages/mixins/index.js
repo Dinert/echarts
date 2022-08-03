@@ -95,6 +95,12 @@ export default {
         this.chart.on('mouseover', event => {
           this.timerDownPlay && clearTimeout(this.timerDownPlay)
           this.timerDownPlay = null
+
+          // 取消轮播选中
+          this.chart.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 0
+          })
         })
         this.chart.on('mouseout', event => {
           this.autoDownPlay(this.chart, this.dataIndexDownPlay, options)
