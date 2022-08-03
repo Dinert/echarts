@@ -21,6 +21,7 @@ $ yarn add '@dinert/echarts'
 ```html
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
 <script src="lib-umd.js"></script>
 ```
 
