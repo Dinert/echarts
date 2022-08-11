@@ -27,6 +27,7 @@ export default {
     this.initChart()
 
     resize(() => {
+      this.initChart()
       this.chart.resize()
     }, 10)
   },

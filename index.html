@@ -24,7 +24,7 @@
 <body>
   <div id="app">
     <button @click="changeData">切换数据</button>
-    <d-echart @callback="callback" @config-callback="configCallback" :chart-data="chartData" type="pie" :key="key"></d-echart>
+    <d-echart @callback="callback" @config-callback="configCallback" :chart-data="chartData" type="line" :key="key"></d-echart>
   </div>
 </body>
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -40,7 +40,7 @@
         _autoTooltip: 3000,
         _autoDownPlay: 3000,
         series: [{
-          type: 'pie',
+          type: 'line',
           data: []
         }]
       },
@@ -59,7 +59,7 @@
           _autoTooltip: 3000,
           _autoDownPlay: 3000,
           series: [{
-            type: 'pie',
+            type: 'line',
             data: [1, 2, 3, 4, 5, 6]
           }]
         }
