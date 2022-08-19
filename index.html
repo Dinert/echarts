@@ -24,7 +24,8 @@
 <body>
   <div id="app">
     <button @click="changeData">切换数据</button>
-    <d-echart @callback="callback" @config-callback="configCallback" :chart-data="chartData" type="line" :key="key"></d-echart>
+    <d-echart @callback="callback" @config-callback="configCallback" :options="chartOptions" :chart-data="chartData" type="line" :key="key">
+    </d-echart>
   </div>
 </body>
 <script src="http://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -36,13 +37,16 @@
   new Vue({
     el: '#app',
     data: {
+      chartOptions: {
+        xAxis: [
+          {
+            axisTick: {
+              show: false
+            }
+          }
+        ]
+      },
       chartData: {
-        _autoTooltip: 3000,
-        _autoDownPlay: 3000,
-        series: [{
-          type: 'line',
-          data: []
-        }]
       },
       key: false
     },
