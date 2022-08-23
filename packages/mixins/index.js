@@ -38,10 +38,10 @@ export default {
 
 
       // 默认配置
-      const propDfaultOptions = _.defaultsDeep(this.options, defaultOptions)
+      const propDfaultOptions = _.defaultsDeep(_.cloneDeep(this.options), defaultOptions)
 
       // 数据组装完成
-      let options = _.defaultsDeep(this.chartData, propDfaultOptions)
+      let options = _.defaultsDeep(_.cloneDeep(this.chartData), propDfaultOptions)
 
       // 设置默认颜色
       this.setGradualColors(options)
