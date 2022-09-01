@@ -81,8 +81,7 @@ export default {
         this.dataIndexTooltip = 0
         this.autoTooltipPlay(this.chart, this.dataIndexTooltip,  options)
         this.chart.on('mouseover', event => {
-          this.timerTooltip && clearTimeout(this.timerTooltip)
-          this.timerTooltip = null
+          this.cleartTooltipTimerout()
         })
         this.chart.on('mouseout', event => {
           this.autoTooltipPlay(this.chart, this.dataIndexTooltip, options)
@@ -94,8 +93,7 @@ export default {
         this.dataIndexDownPlay = 0
         this.autoDownPlay(this.chart, this.dataIndexDownPlay, options)
         this.chart.on('mouseover', event => {
-          this.timerDownPlay && clearTimeout(this.timerDownPlay)
-          this.timerDownPlay = null
+      
 
           // 取消轮播选中
           this.chart.dispatchAction({
@@ -116,6 +114,19 @@ export default {
       }
     },
 
+    // 清除tooltip定时器
+    cleartTooltipTimerout() {
+      this.timerTooltip && clearTimeout(this.timerTooltip)
+      this.timerTooltip = null
+    },
+
+    // 清除downPlay的定时器
+    clearDownTimerDownPlay() {
+      this.timerDownPlay && clearTimeout(this.timerDownPlay)
+      this.timerDownPlay = null
+    },
+
+
     // 自动播放tooltip
     autoTooltipPlay(chart, index, options) {
       if(this.timerTooltip === null) {
@@ -126,8 +137,7 @@ export default {
             dataIndex: index
           })
           options.series[0].data.length === this.dataIndexTooltip + 1 ? (this.dataIndexTooltip = 0) : this.dataIndexTooltip++
-          this.timerTooltip && clearTimeout(this.timerTooltip)
-          this.timerTooltip = null
+          this.cleartTooltipTimerout()
           this.autoTooltipPlay(chart, this.dataIndexTooltip, options)
         }, options._autoTooltip)
       }
@@ -147,8 +157,7 @@ export default {
             seriesIndex: 0,
             dataIndex: index
           })
-          this.timerDownPlay && clearTimeout(this.timerDownPlay)
-          this.timerDownPlay = null
+          this.clearDownTimerDownPlay()
           this.autoDownPlay(chart, this.dataIndexDownPlay, options)
         }, options._autoDownPlay)
       }
@@ -194,8 +203,12 @@ export default {
   },
   watch: {
     chartData: {
-      handler() {
-        this.initChart()
+      handler(newVal, oldVal) {
+        if(!_.isEqual(newVal, oldVal)) {
+          this.cleartTooltipTimerout()
+          this.clearDownTimerDownPlay()
+          this.initChart()
+        }
       },
     }
   }

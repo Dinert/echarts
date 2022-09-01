@@ -24,7 +24,8 @@
 <body>
   <div id="app">
     <button @click="changeData">切换数据</button>
-    <d-echart @callback="callback" @config-callback="configCallback" :options="chartOptions" :chart-data="chartData" type="line" :key="key">
+    <d-echart @callback="callback" @config-callback="configCallback" :options="chartOptions" :chart-data="chartData"
+      type="line" :key="key">
     </d-echart>
   </div>
 </body>
@@ -50,6 +51,10 @@
       },
       key: false
     },
+    mounted() {
+      this.changeData()
+
+    },
     methods: {
       configCallback(options, chart, callback) {
         callback(options)
@@ -58,15 +63,19 @@
         console.log(chart, 'aaaaaaaaaaaa')
       },
       changeData() {
-        this.chartData = {
-          _isGradualColors: false,
-          _autoTooltip: 3000,
-          _autoDownPlay: 3000,
-          series: [{
-            type: 'line',
-            data: [1, 2, 3, 4, 5, 6]
-          }]
-        }
+        setTimeout(() => {
+          this.chartData = {
+            _isGradualColors: false,
+            _autoTooltip: 3000,
+            _autoDownPlay: 3000,
+            series: [{
+              type: 'bar',
+              data: [1, 2, 3, 4, 5, 6]
+            }]
+          }
+          this.changeData()
+        }, 10000)
+
       }
     },
     components: {
