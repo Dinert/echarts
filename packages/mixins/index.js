@@ -13,6 +13,7 @@ export default {
       timerDownPlay: null,
       dataIndexTooltip: 0,
       dataIndexDownPlay: 0,
+      seriesIndexTooltip: 0
     };
   },
   created() {
@@ -131,12 +132,16 @@ export default {
     autoTooltipPlay(chart, index, options) {
       if(this.timerTooltip === null) {
         this.timerTooltip = setTimeout(() => {
+          this.findDataSeries(options.series, index)
+
           chart.dispatchAction({
             type: 'showTip',
-            seriesIndex: 0,
+            seriesIndex: this.seriesIndexTooltip,
             dataIndex: index
           })
-          options.series[0].data.length === this.dataIndexTooltip + 1 ? (this.dataIndexTooltip = 0) : this.dataIndexTooltip++
+          this.$emit('auto-tooltip-callback', this.chart, this.seriesIndexTooltip, index)
+
+          options.series[0].data.length === this.dataIndexTooltip + 1 ? (this.dataIndexTooltip = 0) : this.dataIndexTooltip ++
           this.cleartTooltipTimerout()
           this.autoTooltipPlay(chart, this.dataIndexTooltip, options)
         }, options._autoTooltip)
@@ -147,16 +152,19 @@ export default {
     autoDownPlay(chart, index, options) {
       if(this.timerDownPlay === null) {
         this.timerDownPlay = setTimeout(() => {
+          
           chart.dispatchAction({
             type: 'downplay',
             seriesIndex: 0,
           })
-          options.series[0].data.length === this.dataIndexDownPlay + 1 ? (this.dataIndexDownPlay = 0) : this.dataIndexDownPlay++
           chart.dispatchAction({
             type: 'highlight',
             seriesIndex: 0,
             dataIndex: index
           })
+
+          this.$emit('auto-downplay-callback', this.chart, index)
+          options.series[0].data.length === this.dataIndexDownPlay + 1 ? (this.dataIndexDownPlay = 0) : this.dataIndexDownPlay++
           this.clearDownTimerDownPlay()
           this.autoDownPlay(chart, this.dataIndexDownPlay, options)
         }, options._autoDownPlay)
@@ -171,6 +179,21 @@ export default {
         echartOptions.xAxis = echartOptions.xAxis || [{}]
         echartOptions.yAxis = echartOptions.yAxis || [{}]
       }
+    },
+
+    // 找到有数据的series
+    findDataSeries(series, index) {
+      if(!series[this.seriesIndexTooltip] || !series[this.seriesIndexTooltip].data) {
+        this.seriesIndexTooltip = 0
+        return
+      }
+
+        const data = series[this.seriesIndexTooltip].data[index]
+        if(!data) {
+          this.seriesIndexTooltip ++
+          this.findDataSeries(series, index)
+        }
+
     },
 
     setGradualColors(options) {

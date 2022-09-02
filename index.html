@@ -24,8 +24,8 @@
 <body>
   <div id="app">
     <button @click="changeData">切换数据</button>
-    <d-echart @callback="callback" @config-callback="configCallback" :options="chartOptions" :chart-data="chartData"
-      type="line" :key="key">
+    <d-echart :options="chartOptions" :chart-data="chartData"
+      type="line" :key="key" @auto-tooltip-callback="autoTooltipCallback">
     </d-echart>
   </div>
 </body>
@@ -56,6 +56,9 @@
 
     },
     methods: {
+      autoTooltipCallback(chart) {
+        console.log(chart, 'chartchartchart')
+      },
       configCallback(options, chart, callback) {
         callback(options)
       },
@@ -63,19 +66,40 @@
         console.log(chart, 'aaaaaaaaaaaa')
       },
       changeData() {
-        setTimeout(() => {
-          this.chartData = {
-            _isGradualColors: false,
-            _autoTooltip: 3000,
-            _autoDownPlay: 3000,
-            series: [{
-              type: 'bar',
-              data: [1, 2, 3, 4, 5, 6]
-            }]
-          }
-          this.changeData()
-        }, 10000)
-
+        this.chartData = {
+          _isGradualColors: false,
+          _autoTooltip: 3000,
+          "legend": {
+            "data": ["落户奖励", "经营贡献奖", "办公用房补贴", "提升能级奖励"]
+          },
+          "series": [{
+            "data": [68, 62, 75, null],
+            "name": "落户奖励",
+            "type": "bar"
+          }, {
+            "data": [180, 167, 212, null],
+            "name": "经营贡献奖",
+            "type": "bar"
+          }, {
+            "data": [29, 33, 38, null],
+            "name": "办公用房补贴",
+            "type": "bar"
+          }, {
+            "data": [null, null, 26, 29],
+            "name": "提升能级奖励",
+            "type": "bar"
+          }],
+          "xAxis": [{
+            "axisTick": {
+              "show": false
+            },
+            "data": [2019, 2020, 2021, 2022],
+            "type": "category"
+          }],
+          "yAxis": [{
+            "type": "value"
+          }]
+        }
       }
     },
     components: {
