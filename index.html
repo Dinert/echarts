@@ -25,7 +25,7 @@
   <div id="app">
     <button @click="changeData">切换数据</button>
     <d-echart :options="chartOptions" :chart-data="chartData"
-      type="line" :key="key" @auto-tooltip-callback="autoTooltipCallback">
+      type="line" :key="key" @auto-tooltip-callback="autoTooltipCallback" @callback="callback">
     </d-echart>
   </div>
 </body>
@@ -34,7 +34,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
 <script src="./dist/bundle.umd.js"></script>
 <script>
-
   new Vue({
     el: '#app',
     data: {
@@ -63,7 +62,13 @@
         callback(options)
       },
       callback(chart) {
-        console.log(chart, 'aaaaaaaaaaaa')
+
+        chart.getZr().on('mouseover', event => {
+          event.topTarget.parent.setStyle('color', 'red')
+          const legendDataIndex = event.topTarget.parent.__legendDataIndex // 每个legend的index
+        })
+
+
       },
       changeData() {
         this.chartData = {
