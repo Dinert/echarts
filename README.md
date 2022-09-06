@@ -50,8 +50,11 @@ $ yarn add '@dinert/echarts'
 |    type    | echarts的图表类型 | Object | echarts的图表类型 |  line  |
 
 ### chart-data下的echarts额外属性
-| 参数  | 说明  | 类型  | 可选值 | 默认值 |
-| :---: | :---: | :---: | :----: | :----: |
+|       参数       |            说明            |  类型   |   可选值   | 默认值 |
+| :--------------: | :------------------------: | :-----: | :--------: | :----: |
+|   _autoTooltip   |    自动轮播tooltip时长     | number  |            |   一   |
+|  _autoDownPlay   | 自动播放饼图的downplay时长 | number  |            |   一   |
+| _isGradualColors |       是否是渐变颜色       | boolean | false/true |  true  |
 
 
 ### DEchart Events
