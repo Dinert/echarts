@@ -23,6 +23,7 @@
 
 <body>
   <div id="app">
+    <button @click="changeColor">改变颜色</button>
     <d-echart :options="chartOptions" :chart-data="chartData" type="line" :key="key"
       @auto-tooltip-callback="autoTooltipCallback" @callback="callback">
     </d-echart>
@@ -43,34 +44,13 @@
               show: false
             }
           }
-        ]
+        ],
+        configCallback(options, chart) {
+          console.log(options, 'optionssssssssss')
+          return options
+        }
       },
       chartData: {
-      },
-      key: false
-    },
-    mounted() {
-      this.changeData()
-
-    },
-    methods: {
-      autoTooltipCallback(chart) {
-        console.log(chart, 'chartchartchart')
-      },
-      configCallback(options, chart, callback) {
-        callback(options)
-      },
-      callback(chart) {
-
-        chart.getZr().on('mouseover', event => {
-          event.topTarget.parent.setStyle('color', 'red')
-          const legendDataIndex = event.topTarget.parent.__legendDataIndex // 每个legend的index
-        })
-
-
-      },
-      changeData() {
-        this.chartData = {
           _autoTooltip: 3000,
           _isGradualColors: false,
           title: {
@@ -93,11 +73,11 @@
               saveAsImage: {}
             }
           },
-          xAxis: {
+          xAxis: [{
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          },
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          }],
           yAxis: {
             type: 'value'
           },
@@ -133,8 +113,28 @@
               data: [820, 932, 901, 934, 1290, 1330, 1320]
             }
           ]
-        }
-      }
+        },
+      key: false
+    },
+    mounted() {
+    },
+    methods: {
+      changeColor() {
+        // this.chartData = {
+        //   ...this.chartData,
+        //   color: ['red', 'blue']
+        // }
+        this.$set(this.chartData, 'color', ['red', 'blue'])
+      },  
+      autoTooltipCallback(chart) {
+        console.log(chart, 'chartchartchart')
+      },
+      configCallback(options, chart, callback) {
+        callback(options)
+      },
+      callback(chart) {
+
+      },
     },
     components: {
       DEchart: window['dinert-echarts'].DEchart

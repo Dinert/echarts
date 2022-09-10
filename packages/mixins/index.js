@@ -16,6 +16,11 @@ export default {
       seriesIndexTooltip: 0
     };
   },
+  computed: {
+    chartDataCopy() {
+      return _.cloneDeep(this.chartData)
+    }
+  },
   created() {
     this.id = "e_chart_" + getUuid();
   },
@@ -225,14 +230,16 @@ export default {
     }
   },
   watch: {
-    chartData: {
+    chartDataCopy: {
       handler(newVal, oldVal) {
+
         if(!_.isEqual(newVal, oldVal)) {
           this.cleartTooltipTimerout()
           this.clearDownTimerDownPlay()
           this.initChart()
         }
       },
+      deep: true,
     }
   }
 }
