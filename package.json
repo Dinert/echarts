@@ -1,6 +1,6 @@
 {
   "name": "@dinert/echarts",
-  "version": "0.1.6",
+  "version": "0.1.61",
   "description": "基于echarts二次封装的vue组件",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
