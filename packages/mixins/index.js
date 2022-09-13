@@ -127,6 +127,9 @@ export default {
       }
 
       // 图表渲染完成
+      setTimeout(() => {
+        this.chart.resize()
+      })
       if (typeof options.callback === 'function') {
         options.callback(this.chart, options)
       } else {
