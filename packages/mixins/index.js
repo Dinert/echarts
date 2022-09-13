@@ -99,15 +99,29 @@ export default {
         this.dataIndexDownPlay = 0
         this.autoDownPlay(this.chart, this.dataIndexDownPlay, options)
         this.chart.on('mouseover', event => {
-      
+          const index = event.dataIndex
 
           // 取消轮播选中
           this.chart.dispatchAction({
               type: 'downplay',
               seriesIndex: 0
           })
+
+          this.chart.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: index
+          })
+
+          this.clearDownTimerDownPlay()
         })
         this.chart.on('mouseout', event => {
+
+          // 取消轮播选中
+          this.chart.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0
+          })
           this.autoDownPlay(this.chart, this.dataIndexDownPlay, options)
         })
       }
