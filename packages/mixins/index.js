@@ -127,8 +127,9 @@ export default {
       }
 
       // 图表渲染完成
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         this.chart.resize()
+        clearTimeout(timer)
       })
       if (typeof options.callback === 'function') {
         options.callback(this.chart, options)
