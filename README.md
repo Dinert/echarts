@@ -33,11 +33,11 @@ $ yarn add '@dinert/echarts'
     </div>
 </template>
 <script>
-    import {DEChart} from '@dinert/echarts'
+    import {DEchart} from '@dinert/echarts'
 
     export default {
         components: {
-            DEChart
+            DEchart
         },
         data() {
             return {

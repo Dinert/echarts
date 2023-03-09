@@ -1,6 +1,6 @@
 import echarts from "#/default/echarts";
 import defaultOptions from "#/default/options";
-import { resize, getUuid } from "@/utils/tools.js";
+import { getUuid } from "@/utils/tools.js";
 import _ from 'lodash'
 export default {
   data() {
@@ -32,12 +32,20 @@ export default {
 
     this.initChart()
 
-    resize(() => {
+    window.addEventListener('resize', this.resize, false)
+
+  },
+  
+  destroyed() {
+      window.removeEventListener('resize', this.resize, false)
+  },
+  
+  methods: {
+    resize: _.debounce(function () {
       this.initChart()
       this.chart.resize()
-    }, 10)
-  },
-  methods: {
+  }, 100),
+
     // 初始化图表
     initChart() {
       const otherParams = ['callback', 'config-callback', '_autoTooltip', '_autoDownPlay']
