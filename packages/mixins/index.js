@@ -32,19 +32,23 @@ export default {
 
     this.initChart()
 
-    window.addEventListener('resize', this.resize, false)
+    this.chart.resize()
+
+    this.resize =  _.debounce(() =>{
+        this.initChart()
+        this.chart.resize()
+    }, 10),
+
+    window.addEventListener('resize', this.resize, true)
 
   },
-  
+
   destroyed() {
-      window.removeEventListener('resize', this.resize, false)
+      window.removeEventListener('resize', this.resize, true)
   },
-  
+
   methods: {
-    resize: _.debounce(function () {
-      this.initChart()
-      this.chart.resize()
-  }, 100),
+
 
     // 初始化图表
     initChart() {
@@ -183,7 +187,7 @@ export default {
     autoDownPlay(chart, index, options) {
       if(this.timerDownPlay === null) {
         this.timerDownPlay = setTimeout(() => {
-          
+
           chart.dispatchAction({
             type: 'downplay',
             seriesIndex: 0,
